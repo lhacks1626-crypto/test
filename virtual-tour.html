@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concordia College Virtual Tour</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.css">
+<script src="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.js"></script>
+
+<style>
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+}
+#panorama{
+    width:100%;
+    height:100vh;
+}
+#homeBtn{
+    position:fixed;
+    top:20px;
+    right:20px;
+    z-index:9999;
+    padding:10px 20px;
+    font-size:16px;
+    background:#004080;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+#homeBtn:hover{
+    background:#0066cc;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="welcomeVoice">
+    <source src="welcome.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="bgMusic"loop hidden>
+    <source src="backmusic.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+document.addEventListener("click", function () {
+
+    let welcome = document.getElementById("welcomeVoice");
+    let music = document.getElementById("bgMusic");
+
+    welcome.play();
+
+    welcome.onended = function () {
+        music.play();
+    };
+
+}, { once: true });
+</script>
+
+<button onclick="location.href='index.html'" id="homeBtn">
+    🏠 Back to Home
+</button>
+
+<div id="panorama"></div>
+
+<script>
+
+var viewer = pannellum.viewer('panorama',{
+
+"default":{
+    "firstScene":"gate",
+    "sceneFadeDuration":1000,
+    "autoLoad":true
+},
+
+"scenes":{
+
+"gate":{
+"title":"Main Gate",
+"type":"equirectangular",
+"panorama":"https://pannellum.org/images/alma.jpg",
+
+"hotSpots":[
+{
+"pitch":0,
+"yaw":20,
+"type":"scene",
+"text":"Go to Quadrangle",
+"sceneId":"quadrangle"
+}
+]
+},
+
+"quadrangle":{
+"title":"Quadrangle",
+"type":"equirectangular",
+"panorama":"https://pannellum.org/images/cerro-toco-0.jpg",
+
+"hotSpots":[
+{
+"pitch":0,
+"yaw":180,
+"type":"scene",
+"text":"Back to Gate",
+"sceneId":"gate"
+},
+{
+"pitch":0,
+"yaw":40,
+"type":"scene",
+"text":"Go to Library",
+"sceneId":"library"
+}
+]
+},
+
+"library":{
+"title":"Library",
+"type":"equirectangular",
+"panorama":"images/library360.jpg",
+
+"hotSpots":[
+{
+"pitch":0,
+"yaw":180,
+"type":"scene",
+"text":"Back to Quadrangle",
+"sceneId":"quadrangle"
+},
+{
+"pitch":0,
+"yaw":30,
+"type":"scene",
+"text":"Go to Computer Laboratory",
+"sceneId":"lab"
+}
+]
+},
+
+"lab":{
+"title":"Computer Laboratory",
+"type":"equirectangular",
+"panorama":"images/lab360.jpg",
+
+"hotSpots":[
+{
+"pitch":0,
+"yaw":180,
+"type":"scene",
+"text":"Back to Library",
+"sceneId":"library"
+},
+{
+"pitch":0,
+"yaw":30,
+"type":"scene",
+"text":"Go to Chapel",
+"sceneId":"chapel"
+}
+]
+},
+
+"chapel":{
+"title":"Chapel",
+"type":"equirectangular",
+"panorama":"images/chapel360.jpg",
+
+"hotSpots":[
+{
+"pitch":0,
+"yaw":180,
+"type":"scene",
+"text":"Back to Laboratory",
+"sceneId":"lab"
+},
+{
+"pitch":0,
+"yaw":30,
+"type":"scene",
+"text":"Go to Gymnasium",
+"sceneId":"gym"
+}
+]
+},
+
+"gym":{
+"title":"Gymnasium",
+"type":"equirectangular",
+"panorama":"images/gym360.jpg",
+
+"hotSpots":[
+{
+"pitch":0,
+"yaw":180,
+"type":"scene",
+"text":"Back to Chapel",
+"sceneId":"chapel"
+},
+{
+"pitch":0,
+"yaw":30,
+"type":"scene",
+"text":"Go to Main Building",
+"sceneId":"main"
+}
+]
+},
+
+"main":{
+"title":"Main Building",
+"type":"equirectangular",
+"panorama":"images/main360.jpg",
+
+"hotSpots":[
+{
+"pitch":0,
+"yaw":180,
+"type":"scene",
+"text":"Back to Gymnasium",
+"sceneId":"gym"
+}
+]
+}
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
